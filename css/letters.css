@@ -1,0 +1,500 @@
+/* ==========================================================================
+   LETTERS.CSS - 5 GIAO DIỆN LÁ THƯ & CHẾ ĐỘ CHỤP ẢNH SIÊU NÉT
+   Dành riêng cho Nguyễn Thị Tường Vy (Bun • Kim Phụng)
+   ========================================================================== */
+
+/* MODAL CONTAINER CHUNG */
+.letter-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(92, 64, 51, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.letter-modal-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.letter-modal-wrapper {
+  width: 100%;
+  max-width: 620px;
+  max-height: 92dvh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  animation: letterSlideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* THANH ĐIỀU KHIỂN & CHỌN THEME TRÊN TOP (ẨN KHI SCREENSHOT MODE) */
+.letter-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px 14px;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.letter-theme-selector {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+}
+.letter-theme-selector::-webkit-scrollbar {
+  display: none;
+}
+
+.theme-chip {
+  border: 1.5px solid #FFCAD4;
+  background: #FFF;
+  color: #5C4033;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  min-height: 36px;
+}
+
+.theme-chip.active,
+.theme-chip:hover {
+  background: #FF8FA3;
+  color: #FFF;
+  border-color: #FF5D8F;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(255, 93, 143, 0.3);
+}
+
+.letter-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.letter-btn {
+  background: #FFF;
+  border: 1.5px solid #E2D1F9;
+  color: #5C4033;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.25s ease;
+  min-height: 38px;
+}
+
+.letter-btn:hover {
+  background: #E2D1F9;
+  transform: translateY(-1px);
+}
+
+.letter-btn.primary {
+  background: #FF5D8F;
+  color: #FFF;
+  border-color: #FF5D8F;
+  box-shadow: 0 4px 12px rgba(255, 93, 143, 0.35);
+}
+.letter-btn.primary:hover {
+  background: #FF477E;
+}
+
+.letter-close-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.85);
+  color: #5C4033;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.letter-close-btn:hover {
+  background: #FF8FA3;
+  color: #FFF;
+  transform: rotate(90deg);
+}
+
+/* KHUNG GIẤY THƯ CHÍNH (SẼ ĐƯỢC CHỤP/RENDER THÀNH PNG) */
+.letter-paper-card {
+  position: relative;
+  width: 100%;
+  border-radius: 24px;
+  padding: 34px 30px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* CON DẤU BƯU ĐIỆN VÀ TEM THƯ 04/04/2009 */
+.letter-header-decor {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  z-index: 2;
+}
+
+.postmark-stamp {
+  width: 68px;
+  height: 68px;
+  border: 2px dashed rgba(92, 64, 51, 0.5);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transform: rotate(-12deg);
+  font-family: 'Quicksand', sans-serif;
+  color: rgba(92, 64, 51, 0.65);
+  font-weight: 700;
+  line-height: 1.1;
+  pointer-events: none;
+}
+.postmark-stamp span.date {
+  font-size: 11px;
+  color: #FF5D8F;
+  letter-spacing: 0.5px;
+}
+.postmark-stamp span.location {
+  font-size: 9px;
+  text-transform: uppercase;
+}
+
+.postage-stamp {
+  width: 58px;
+  height: 68px;
+  background: #FFF;
+  border: 2px dashed #FF8FA3;
+  border-radius: 6px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  transform: rotate(6deg);
+  position: relative;
+}
+.postage-stamp::after {
+  content: "04.04";
+  position: absolute;
+  bottom: 2px;
+  font-size: 9px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 800;
+  color: #FF5D8F;
+}
+
+/* NỘI DUNG LÁ THƯ */
+.letter-salutation {
+  font-family: 'Mali', cursive, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #5C4033;
+  margin-top: 4px;
+}
+
+.letter-body-text {
+  font-family: 'Mali', cursive, sans-serif;
+  font-size: 17px;
+  line-height: 1.8;
+  color: #4A3525;
+  white-space: pre-wrap;
+  word-break: break-word;
+  min-height: 120px;
+  position: relative;
+  z-index: 2;
+}
+
+.letter-footer-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.letter-sticker-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 143, 163, 0.4);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'Quicksand', sans-serif;
+  color: #FF5D8F;
+}
+
+.letter-signature {
+  text-align: right;
+  font-family: 'Dancing Script', cursive;
+  font-size: 24px;
+  font-weight: 700;
+  color: #5C4033;
+}
+
+.letter-signature span.date-signed {
+  display: block;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #8C6A5D;
+}
+
+/* CON DẤU SÁP 3D TRÁI TIM */
+.wax-seal {
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #FF758F, #C9184A);
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.5),
+              inset 0 -3px 6px rgba(0, 0, 0, 0.4),
+              0 6px 14px rgba(201, 24, 74, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFF;
+  font-size: 22px;
+  transform: rotate(-10deg);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   5 GIAO DIỆN LÁ THƯ (STATIONERY THEMES)
+   ========================================================================== */
+
+/* 1. SAKURA PASTEL PINK */
+.theme-sakura-pink {
+  background: linear-gradient(135deg, #FFF0F3 0%, #FFCCD5 100%);
+  border: 8px solid #FFF;
+  outline: 2px dashed #FFB7C5;
+  outline-offset: -5px;
+}
+.theme-sakura-pink::before {
+  content: "🌸";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 32px;
+  opacity: 0.35;
+}
+.theme-sakura-pink::after {
+  content: "🌸";
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  font-size: 24px;
+  opacity: 0.35;
+}
+
+/* 2. VINTAGE LOVE LETTER */
+.theme-vintage-love {
+  background: #FDF6E2;
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 31px,
+    rgba(212, 175, 55, 0.2) 31px,
+    rgba(212, 175, 55, 0.2) 32px
+  );
+  border: 10px solid #F5EBE0;
+  box-shadow: inset 0 0 40px rgba(181, 131, 90, 0.25), 0 20px 50px rgba(0,0,0,0.18);
+  color: #4A3525;
+}
+.theme-vintage-love .letter-salutation,
+.theme-vintage-love .letter-body-text,
+.theme-vintage-love .letter-signature {
+  font-family: 'Dancing Script', cursive;
+  font-size: 21px;
+}
+
+/* 3. KAWAII BUNNY DIARY */
+.theme-bunny-diary {
+  background-color: #FFF9F5;
+  background-image: 
+    linear-gradient(rgba(255, 183, 197, 0.25) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 183, 197, 0.25) 1px, transparent 1px);
+  background-size: 20px 20px;
+  border: 6px solid #FFCAD4;
+  border-radius: 28px;
+}
+.theme-bunny-diary::before {
+  content: "🐰";
+  position: absolute;
+  top: 15px;
+  right: 80px;
+  font-size: 28px;
+  transform: rotate(12deg);
+}
+.theme-bunny-diary::after {
+  content: "🍓";
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  font-size: 26px;
+}
+
+/* 4. STARRY MIDNIGHT DREAM */
+.theme-starry-night {
+  background: linear-gradient(145deg, #1D1A39 0%, #2E2554 50%, #452B6A 100%);
+  border: 4px solid #CDB4DB;
+  box-shadow: 0 0 25px rgba(205, 180, 219, 0.35);
+}
+.theme-starry-night .letter-salutation,
+.theme-starry-night .letter-body-text,
+.theme-starry-night .letter-signature {
+  color: #F8F9FA;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+.theme-starry-night .letter-signature span.date-signed {
+  color: #E2D1F9;
+}
+.theme-starry-night .postmark-stamp {
+  border-color: rgba(226, 209, 249, 0.5);
+  color: #E2D1F9;
+}
+.theme-starry-night .postmark-stamp span.date {
+  color: #FFF3B0;
+}
+.theme-starry-night::before {
+  content: "🌙";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 28px;
+}
+.theme-starry-night::after {
+  content: "✨";
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 24px;
+}
+
+/* 5. STRAWBERRY MILK POSTCARD */
+.theme-strawberry-milk {
+  background: linear-gradient(135deg, #FFE5EC 0%, #FFF0F3 100%);
+  border: 8px dashed #FF758F;
+  border-radius: 20px;
+}
+.theme-strawberry-milk::before {
+  content: "🍓 MILK";
+  position: absolute;
+  top: 12px;
+  left: 18px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  color: #FF5D8F;
+  background: #FFF;
+  padding: 3px 8px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(255, 93, 143, 0.2);
+}
+
+/* ==========================================================================
+   CHẾ ĐỘ CHỤP MÀN HÌNH SẠCH (CLEAN SCREENSHOT MODE)
+   ========================================================================== */
+.letter-modal-backdrop.screenshot-mode {
+  background: #FFF9F5 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  cursor: pointer;
+}
+
+.letter-modal-backdrop.screenshot-mode .letter-toolbar,
+.letter-modal-backdrop.screenshot-mode .letter-close-btn {
+  display: none !important;
+}
+
+.letter-modal-backdrop.screenshot-mode .letter-modal-wrapper {
+  max-width: 580px;
+  box-shadow: none;
+}
+
+.screenshot-tip {
+  display: none;
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(92, 64, 51, 0.85);
+  color: #FFF;
+  padding: 8px 18px;
+  border-radius: 24px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  z-index: 10000;
+  pointer-events: none;
+  animation: heartPulse 3s infinite;
+}
+
+.letter-modal-backdrop.screenshot-mode + .screenshot-tip {
+  display: block;
+}
+
+/* DRAWER XEM LẠI LỜI CHÚC ĐÃ LƯU */
+.saved-wishes-drawer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-height: 80dvh;
+  background: #FFF9F5;
+  border-radius: 28px 28px 0 0;
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.15);
+  z-index: 9998;
+  padding: 24px 20px;
+  overflow-y: auto;
+  transform: translateY(105%);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.saved-wishes-drawer.active {
+  transform: translateY(0);
+}

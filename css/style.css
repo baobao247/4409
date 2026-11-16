@@ -1,0 +1,1564 @@
+/* ==========================================================================
+   STYLE.CSS - CORE DESIGN SYSTEM & RESPONSIVE BENTO LAYOUT
+   Birthday Countdown Web App - Nguyễn Thị Tường Vy (Bun • Kim Phụng)
+   Tối ưu 100% cho GitHub Pages (Đường dẫn tương đối ./) & Cross-Device 60fps
+   ========================================================================== */
+
+/* 1. IMPORT GOOGLE FONTS TIẾNG VIỆT HOÀN HẢO */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Mali:ital,wght@0,500;0,600;0,700;1,500&family=Nunito:wght@600;700;800;900&family=Quicksand:wght@500;600;700;800&display=swap');
+
+/* 2. MODERN CSS VARIABLES - BABY CUTE PASTEL PALETTE */
+:root {
+  --bg-cream: #FFF9F5;
+  --pink-sakura: #FFB7C5;
+  --pink-strawberry: #FF8FA3;
+  --pink-deep: #FF5D8F;
+  --lavender: #E2D1F9;
+  --lavender-deep: #CDB4DB;
+  --butter-yellow: #FFF3B0;
+  --mint: #C7F9CC;
+  --peach: #FFCAD4;
+
+  --text-choco: #5C4033;
+  --text-muted: #8C6A5D;
+  --text-light: #FFF;
+
+  --glass-bg: rgba(255, 255, 255, 0.78);
+  --glass-border: rgba(255, 255, 255, 0.92);
+  --glass-shadow: 0 14px 35px rgba(255, 143, 163, 0.18);
+  --glass-glow: 0 0 20px rgba(255, 183, 197, 0.35);
+
+  --radius-sm: 14px;
+  --radius-md: 20px;
+  --radius-card: 28px;
+  --radius-pill: 50px;
+
+  --font-heading: 'Nunito', 'Quicksand', sans-serif;
+  --font-body: 'Quicksand', sans-serif;
+  --font-letter: 'Mali', cursive, sans-serif;
+  --font-signature: 'Dancing Script', cursive;
+
+  --bounce-easing: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --smooth-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 3. RESET & BASE RULES CHỐNG LỖI TRÌNH DUYỆT MOBILE */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  font-family: var(--font-body);
+  color: var(--text-choco);
+  background-color: var(--bg-cream);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 4. HỆ THỐNG NỀN 2 LỚP: CONTINUOUS AURORA GRADIENT + SEAMLESS SVG PATTERN */
+.aurora-bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: linear-gradient(
+    135deg,
+    #FFD6E0 0%,
+    #E2D1F9 25%,
+    #FFF3B0 50%,
+    #C7F9CC 75%,
+    #FFCAD4 100%
+  );
+  background-size: 300% 300%;
+  animation: auroraDrift 18s ease-in-out infinite alternate;
+  will-change: background-position, filter;
+}
+
+.seamless-pattern-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.45;
+  pointer-events: none;
+  transition: opacity 0.4s ease, background 0.4s ease;
+}
+
+/* 4 KIỂU HOA VĂN SVG INLINE RÕ NÉT, CÓ CHIỀU SÂU */
+/* 1. Hoa Anh Đào & Trái Tim Rơi */
+.pattern-sakura-heart {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16 22c-3.2 0-5.8-2.6-5.8-5.8 0-4.3 5.8-10.2 5.8-10.2s5.8 5.9 5.8 10.2c0 3.2-2.6 5.8-5.8 5.8z' fill='%23FF5D8F' fill-opacity='0.65'/%3E%3Ccircle cx='46' cy='18' r='5' fill='%23FF8FA3' fill-opacity='0.6'/%3E%3Cpath d='M46 44c-2 0-4-1.5-4-3.5 0-2.8 4-7 4-7s4 4.2 4 7c0 2-2 3.5-4 3.5z' fill='%23FF5D8F' fill-opacity='0.6'/%3E%3Ccircle cx='18' cy='46' r='4' fill='%23CDB4DB' fill-opacity='0.65'/%3E%3Cpath d='M30 30l1.2 2.5 2.8.4-2 2 .5 2.8-2.5-1.3-2.5 1.3.5-2.8-2-2 2.8-.4z' fill='%23FFD166' fill-opacity='0.7'/%3E%3C/svg%3E");
+  background-size: 60px 60px;
+}
+
+/* 2. Caro Gingham Pastel Dễ Thương */
+.pattern-gingham {
+  background-image: 
+    linear-gradient(rgba(255, 93, 143, 0.22) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255, 93, 143, 0.22) 2px, transparent 2px),
+    linear-gradient(rgba(205, 180, 219, 0.3) 3px, transparent 3px),
+    linear-gradient(90deg, rgba(205, 180, 219, 0.3) 3px, transparent 3px);
+  background-size: 28px 28px, 28px 28px, 56px 56px, 56px 56px;
+}
+
+/* 3. Đám Mây Nhỏ & Ngôi Sao Lấp Lánh */
+.pattern-stars-clouds {
+  background-image: url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16 12l1.5 3.2L21 16l-2.5 2.5.6 3.5-3.1-1.6-3.1 1.6.6-3.5-2.5-2.5 3.5-.8z' fill='%23FFB703' fill-opacity='0.75'/%3E%3Cpath d='M44 36a6 6 0 0 0-5.5 3.6A5 5 0 0 0 34 44a5 5 0 0 0 5 5h16a5 5 0 0 0 1.2-9.8A6 6 0 0 0 49 36h-5z' fill='%23C7F9CC' stroke='%2380ED99' stroke-width='1.5' fill-opacity='0.8'/%3E%3Ccircle cx='52' cy='14' r='3' fill='%23CDB4DB' fill-opacity='0.8'/%3E%3Cpath d='M14 48c0-3 2.5-5 5-5s5 2 5 5-2.5 5-5 5-5-2-5-5z' fill='%23FFCAD4' fill-opacity='0.7'/%3E%3C/svg%3E");
+  background-size: 64px 64px;
+}
+
+/* 4. Chấm Bi Kẹo Ngọt & Nơ Xinh */
+.pattern-polka-dots {
+  background-image: 
+    radial-gradient(circle, #FF5D8F 4px, transparent 4.5px),
+    radial-gradient(circle, #CDB4DB 4px, transparent 4.5px),
+    url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M24 24c-2-2-5-1-5 1s3 3 5 1c2 2 5 1 5-1s-3-3-5-1z' fill='%23FF8FA3' fill-opacity='0.6'/%3E%3C/svg%3E");
+  background-size: 44px 44px, 44px 44px, 44px 44px;
+  background-position: 0 0, 22px 22px, 11px 11px;
+}
+
+/* MINI TOAST THÔNG BÁO ĐỔI HOA VĂN */
+.mini-toast-box {
+  position: fixed;
+  top: max(16px, env(safe-area-inset-top));
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.96);
+  border: 2px solid var(--pink-deep);
+  border-radius: var(--radius-pill);
+  padding: 8px 18px;
+  box-shadow: 0 8px 24px rgba(255, 93, 143, 0.35);
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--pink-deep);
+  z-index: 10001;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s var(--bounce-easing);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.mini-toast-box.show {
+  opacity: 1;
+  visibility: visible;
+  animation: toastSlideIn 0.35s var(--bounce-easing);
+}
+
+/* 5. CANVAS HIỆU ỨNG RƠI & LỚP VỆT SAO */
+#particles-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.sparkle-particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  width: 14px;
+  height: 14px;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='%23FF5D8F' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sparklePop 0.65s ease-out forwards;
+}
+
+/* 6. DÂY CỜ BUNTING CHÚC MỪNG SINH NHẬT (KHI BẬT MODE 04/04) */
+.birthday-bunting-banner {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  pointer-events: none;
+  overflow: hidden;
+  height: 52px;
+  animation: buntingSway 5s ease-in-out infinite;
+}
+
+.birthday-bunting-banner.active {
+  display: flex;
+  justify-content: center;
+}
+
+.bunting-flags-row {
+  display: flex;
+  gap: 3px;
+  padding: 0 10px;
+}
+
+.bunting-flag {
+  width: 22px;
+  height: 34px;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 4px;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 900;
+  color: #5C4033;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.bunting-flag:nth-child(5n+1) { background: #FFB7C5; }
+.bunting-flag:nth-child(5n+2) { background: #E2D1F9; }
+.bunting-flag:nth-child(5n+3) { background: #FFF3B0; }
+.bunting-flag:nth-child(5n+4) { background: #C7F9CC; }
+.bunting-flag:nth-child(5n+5) { background: #FFCAD4; }
+
+/* 7. BÓNG BAY PASTEL TƯƠNG TÁC (BALLOONS CONTAINER) */
+.birthday-balloons-container {
+  display: none;
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 25;
+  overflow: hidden;
+}
+.birthday-balloons-container.active {
+  display: block;
+}
+
+.floating-balloon {
+  position: absolute;
+  width: 48px;
+  height: 60px;
+  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+  pointer-events: auto;
+  cursor: pointer;
+  animation: balloonFloatUp var(--duration, 12s) linear forwards;
+  filter: drop-shadow(0 6px 12px rgba(255, 143, 163, 0.3));
+  transition: transform 0.2s ease;
+}
+.floating-balloon::after {
+  content: "";
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 18px;
+  background: rgba(92, 64, 51, 0.4);
+}
+.floating-balloon.burst {
+  animation: balloonPopBurst 0.3s ease-out forwards !important;
+  pointer-events: none;
+}
+
+/* 8. THẺ BÍ MẬT TUỔI MỚI (BIRTHDAY SPECIAL CARD) */
+.birthday-special-card {
+  display: none;
+  background: linear-gradient(135deg, #FFF0F3, #FFE5EC);
+  border: 2px solid #FF5D8F;
+  border-radius: 20px;
+  padding: 14px 18px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(255, 93, 143, 0.3);
+  margin-bottom: 16px;
+  animation: letterSlideUp 0.4s var(--bounce-easing);
+}
+.birthday-special-card.active {
+  display: block;
+}
+.special-card-badge {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--pink-deep);
+  margin-bottom: 6px;
+}
+.special-card-btn {
+  background: var(--pink-deep);
+  color: #FFF;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 800;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  margin-top: 6px;
+  box-shadow: 0 4px 10px rgba(255, 93, 143, 0.35);
+}
+
+/* 9. THANH ĐIỀU KHIỂN NỔI (TOP QUICK CONTROLS) */
+.top-quick-bar {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 12px 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  position: relative;
+  z-index: 30;
+}
+
+.top-bar-left, .top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pill-btn {
+  background: var(--glass-bg);
+  border: 1.5px solid var(--glass-border);
+  box-shadow: 0 4px 12px rgba(255, 143, 163, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: var(--radius-pill);
+  padding: 6px 14px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-choco);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  transition: all 0.25s var(--bounce-easing);
+  user-select: none;
+}
+
+.pill-btn:hover {
+  transform: translateY(-2px);
+  background: #FFF;
+  border-color: var(--pink-strawberry);
+  box-shadow: 0 6px 16px rgba(255, 93, 143, 0.25);
+}
+
+.pill-btn.active {
+  background: var(--pink-deep);
+  color: #FFF;
+  border-color: var(--pink-deep);
+}
+
+.pill-btn.bday-preview-btn {
+  background: linear-gradient(135deg, #FF758F, #FF477E);
+  color: #FFF;
+  border: none;
+  animation: heartPulse 3s infinite;
+}
+
+/* 10. HERO HEADER & HUY HIỆU DANH XƯNG BIẾN HÓA */
+.hero-header {
+  max-width: 1180px;
+  margin: 10px auto 16px;
+  padding: 0 16px;
+  text-align: center;
+  position: relative;
+  z-index: 15;
+}
+
+.main-title {
+  font-family: var(--font-heading);
+  font-size: clamp(24px, 4vw, 38px);
+  font-weight: 900;
+  color: #5C4033;
+  line-height: 1.25;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 10px rgba(255, 143, 163, 0.25);
+}
+
+.main-title .highlight-name {
+  color: var(--pink-deep);
+  background: linear-gradient(135deg, #FF5D8F, #FF8FA3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.main-title .highlight-nickname {
+  background: #FFF0F3;
+  color: #FF5D8F;
+  -webkit-text-fill-color: #FF5D8F;
+  padding: 2px 12px;
+  border-radius: 16px;
+  border: 1.5px dashed var(--pink-strawberry);
+  display: inline-block;
+  margin-left: 6px;
+}
+
+/* Dynamic Name Badge Typewriter */
+.name-badge-wrapper {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1.5px solid var(--pink-sakura);
+  padding: 6px 18px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 14px rgba(255, 143, 163, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.badge-sparkle-icon {
+  font-size: 16px;
+  animation: heartPulse 2s infinite;
+}
+
+.typewriter-text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  color: #8C5243;
+  min-height: 22px;
+  display: inline-block;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 14px;
+  background-color: var(--pink-deep);
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: cursorBlink 0.8s infinite;
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* 11. BENTO DASHBOARD CONTAINER (2 CỘT DESKTOP / 1 CỘT MOBILE) */
+.bento-dashboard {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 16px 28px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  position: relative;
+  z-index: 15;
+}
+
+@media (min-width: 1024px) {
+  .bento-dashboard {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+}
+
+.bento-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 12. KAWAII GLASSMORPHISM CARD CHUNG */
+.kawaii-card {
+  background: var(--glass-bg);
+  border: 2px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  position: relative;
+  overflow: visible; /* Đảm bảo không cản popover */
+  transition: transform 0.3s var(--smooth-easing), box-shadow 0.3s var(--smooth-easing);
+}
+
+.kawaii-card:hover {
+  box-shadow: 0 18px 42px rgba(255, 143, 163, 0.24);
+}
+
+.card-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.card-title {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-choco);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-title .title-icon {
+  font-size: 20px;
+}
+
+/* 13. CARD 1: AVATAR SHOWCASE & GỌN HÓA VỚI NÚT TÙY CHỈNH */
+.avatar-showcase-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+}
+
+.avatar-frame-box {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  padding: 8px;
+  background: #FFF;
+  transition: all 0.4s var(--bounce-easing);
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.avatar-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #FFF0F3;
+}
+
+.avatar-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.avatar-caption {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--pink-deep);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--pink-sakura);
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Điều khiển chuyển ảnh Avatar */
+.avatar-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar-nav-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid var(--pink-sakura);
+  background: #FFF;
+  color: var(--text-choco);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s var(--bounce-easing);
+}
+.avatar-nav-btn:hover {
+  background: var(--pink-deep);
+  color: #FFF;
+  transform: scale(1.1);
+}
+
+.avatar-dots-group {
+  display: flex;
+  gap: 6px;
+}
+
+.avatar-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #FFCAD4;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.avatar-dot.active {
+  width: 26px;
+  border-radius: 8px;
+  background: var(--pink-deep);
+}
+
+/* Nút duy nhất mở ngăn kéo tùy chỉnh Avatar */
+.avatar-customize-trigger-btn {
+  background: #FFF;
+  border: 1.5px solid var(--pink-strawberry);
+  border-radius: var(--radius-pill);
+  padding: 8px 18px;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--pink-deep);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(255, 143, 163, 0.2);
+  transition: all 0.25s var(--bounce-easing);
+  min-height: 42px;
+  margin-top: 4px;
+}
+.avatar-customize-trigger-btn:hover {
+  background: var(--pink-deep);
+  color: #FFF;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(255, 93, 143, 0.35);
+}
+
+/* ==========================================================================
+   NGĂN KÉO TÙY CHỈNH AVATAR (POPOVER / BOTTOM SHEET)
+   ========================================================================== */
+.avatar-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(92, 64, 51, 0.4);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.avatar-drawer-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Trên Laptop: Popover nổi căn giữa gọn gàng */
+@media (min-width: 1024px) {
+  .avatar-drawer-backdrop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .avatar-custom-drawer {
+    width: 100%;
+    max-width: 480px;
+    background: #FFF9F5;
+    border: 2px solid var(--glass-border);
+    border-radius: 28px;
+    box-shadow: 0 20px 50px rgba(255, 93, 143, 0.3);
+    padding: 24px;
+    animation: popoverIn 0.3s var(--bounce-easing);
+    position: relative;
+  }
+}
+
+/* Trên Điện Thoại: Bottom Sheet trượt từ đáy màn hình */
+@media (max-width: 1023px) {
+  .avatar-drawer-backdrop {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .avatar-custom-drawer {
+    width: 100%;
+    max-height: 85dvh;
+    background: #FFF9F5;
+    border-radius: 28px 28px 0 0;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+    padding: 20px 20px calc(24px + env(safe-area-inset-bottom));
+    overflow-y: auto;
+    animation: bottomSheetUp 0.35s var(--bounce-easing);
+    position: relative;
+  }
+}
+
+.drawer-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  border-bottom: 1.5px dashed #FFCAD4;
+  padding-bottom: 10px;
+}
+
+.drawer-title {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--text-choco);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.drawer-close-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: #FFF;
+  color: var(--text-choco);
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+}
+.drawer-close-btn:hover {
+  background: var(--pink-deep);
+  color: #FFF;
+  transform: rotate(90deg);
+}
+
+.drawer-section-title {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 12px 0 8px;
+}
+
+.custom-pill-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.option-pill {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-choco);
+  background: #FFF;
+  border: 1.5px solid #FFCAD4;
+  border-radius: 16px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.option-pill.active, .option-pill:hover {
+  background: var(--pink-deep);
+  color: #FFF;
+  border-color: var(--pink-deep);
+  box-shadow: 0 4px 12px rgba(255, 93, 143, 0.3);
+}
+
+/* 14. CARD 2: BỘ ĐẾM NGƯỢC 4 KHỐI PASTEL & THỐNG KÊ HÀNH TRÌNH */
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.countdown-box {
+  background: #FFF;
+  border: 1.5px solid #FFCAD4;
+  border-radius: 18px;
+  padding: 12px 6px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(255, 143, 163, 0.12);
+  transition: transform 0.25s var(--bounce-easing);
+}
+.countdown-box:hover {
+  transform: translateY(-3px);
+}
+
+.countdown-num {
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 3.2vw, 32px);
+  font-weight: 900;
+  color: var(--pink-deep);
+  line-height: 1.1;
+  display: block;
+}
+
+.countdown-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+  display: block;
+}
+
+/* Thanh Tiến Trình Tới Sinh Nhật */
+.bday-progress-wrapper {
+  margin-bottom: 18px;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.progress-track {
+  width: 100%;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #FFCAD4;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  padding: 2px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FFB7C5, #FF5D8F);
+  border-radius: var(--radius-pill);
+  transition: width 1s ease-in-out;
+}
+
+/* Thống Kê Hành Trình Từ 04/04/2009 */
+.journey-stats-card {
+  background: rgba(255, 240, 243, 0.7);
+  border: 1.5px dashed var(--pink-strawberry);
+  border-radius: 20px;
+  padding: 14px 16px;
+}
+
+.journey-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--pink-deep);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.journey-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.journey-item {
+  font-size: 12px;
+  color: var(--text-choco);
+  line-height: 1.3;
+}
+.journey-item strong {
+  display: block;
+  font-size: 16px;
+  font-family: var(--font-heading);
+  color: #C9184A;
+}
+
+/* 15. CARD 3: BÁNH KEM 2 TẦNG THỔI NẾN TƯƠNG TÁC & HÀO QUANG */
+.cake-interactive-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  position: relative;
+}
+
+.cake-visual-wrap {
+  position: relative;
+  width: 180px;
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Hào quang ánh sáng tỏa ra quanh bánh khi thổi tắt nến */
+.cake-halo-aura {
+  display: none;
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+.cake-halo-aura.active {
+  display: block;
+  animation: cakeAuraWave 1.8s ease-out forwards;
+}
+
+.cake-candle {
+  position: relative;
+  width: 10px;
+  height: 38px;
+  background: repeating-linear-gradient(45deg, #FFCAD4, #FFCAD4 6px, #FFF 6px, #FFF 12px);
+  border-radius: 4px;
+  z-index: 5;
+  margin-bottom: -2px;
+}
+
+.candle-flame {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 20px;
+  background: radial-gradient(circle at 50% 80%, #FFF3B0 20%, #FF9E00 70%, transparent 100%);
+  border-radius: 50% 50% 35% 35%;
+  animation: candleFlicker 1.5s ease-in-out infinite;
+  cursor: pointer;
+}
+
+.candle-smoke {
+  display: none;
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  filter: blur(2px);
+}
+
+.cake-candle.blown .candle-flame {
+  display: none;
+}
+.cake-candle.blown .candle-smoke {
+  display: block;
+  animation: smokeWisp 1.6s forwards;
+}
+
+/* Tầng Bánh Kem */
+.cake-tier-top {
+  width: 90px;
+  height: 40px;
+  background: #FFE5EC;
+  border: 2px solid #FF8FA3;
+  border-radius: 14px 14px 6px 6px;
+  position: relative;
+  z-index: 4;
+}
+.cake-tier-top::before {
+  content: "🍓 🍓 🍓";
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.cake-tier-bottom {
+  width: 140px;
+  height: 52px;
+  background: #FFF0F3;
+  border: 2px solid #FF8FA3;
+  border-radius: 16px 16px 10px 10px;
+  position: relative;
+  z-index: 3;
+  margin-top: -6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--pink-deep);
+}
+
+.cake-plate {
+  width: 170px;
+  height: 12px;
+  background: #FFF;
+  border: 2px solid #E2D1F9;
+  border-radius: 20px;
+  margin-top: -3px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+
+.cake-hint-text {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--pink-deep);
+  min-height: 22px;
+}
+
+/* Nút Thắp lại nến khi đã thổi */
+.relight-candle-btn {
+  display: none;
+  background: #FFF;
+  border: 1.5px solid #FF8FA3;
+  color: var(--pink-deep);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 800;
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(255, 143, 163, 0.2);
+  transition: all 0.2s ease;
+  min-height: 38px;
+}
+.relight-candle-btn.active {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.relight-candle-btn:hover {
+  background: var(--pink-deep);
+  color: #FFF;
+  transform: translateY(-2px);
+}
+
+/* 16. CARD 4: MINI VINYL MUSIC PLAYER (KAWAII WALKMAN) */
+.music-player-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.vinyl-showcase-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.vinyl-disc-wrap {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #333 40%, #111 70%, #222 100%);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.vinyl-disc-wrap.playing {
+  animation: vinylSpin 4s linear infinite;
+}
+
+.vinyl-center-art {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #FFCAD4;
+  border: 2px solid #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.track-meta-wrap {
+  flex: 1;
+  min-width: 0;
+}
+
+.track-title {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-choco);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-artist {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.audio-bars-wave {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 22px;
+  margin-top: 6px;
+}
+
+.wave-bar {
+  width: 3px;
+  background: var(--pink-strawberry);
+  border-radius: 2px;
+  height: 6px;
+}
+.playing .wave-bar:nth-child(1) { animation: soundWave 0.8s infinite 0.1s; }
+.playing .wave-bar:nth-child(2) { animation: soundWave 0.8s infinite 0.3s; }
+.playing .wave-bar:nth-child(3) { animation: soundWave 0.8s infinite 0.5s; }
+.playing .wave-bar:nth-child(4) { animation: soundWave 0.8s infinite 0.2s; }
+.playing .wave-bar:nth-child(5) { animation: soundWave 0.8s infinite 0.4s; }
+
+/* Progress Seek Bar */
+.music-scrub-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.time-stamp {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  min-width: 34px;
+}
+
+.scrub-track {
+  flex: 1;
+  height: 8px;
+  background: #FFF;
+  border: 1px solid #FFCAD4;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.scrub-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #FF8FA3, #FF5D8F);
+  border-radius: var(--radius-pill);
+}
+
+/* Nút điều khiển phát nhạc */
+.player-buttons-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ctrl-btn {
+  background: #FFF;
+  border: 1.5px solid var(--pink-sakura);
+  color: var(--text-choco);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.25s var(--bounce-easing);
+}
+.ctrl-btn:hover {
+  background: var(--pink-deep);
+  color: #FFF;
+  transform: scale(1.08);
+}
+
+/* NÂNG CẤP TRẠNG THÁI REPEAT ON NỔI BẬT */
+.ctrl-btn.repeat-on {
+  background: #FF5D8F !important;
+  color: #FFFFFF !important;
+  border-color: #FF5D8F !important;
+  box-shadow: 0 4px 14px rgba(255, 93, 143, 0.5) !important;
+  transform: scale(1.05);
+}
+
+.ctrl-btn.play-main-btn {
+  width: 48px;
+  height: 48px;
+  background: var(--pink-deep);
+  color: #FFF;
+  border-color: var(--pink-deep);
+  font-size: 20px;
+  box-shadow: 0 4px 14px rgba(255, 93, 143, 0.4);
+}
+.ctrl-btn.play-main-btn:hover {
+  background: #FF477E;
+  transform: scale(1.12);
+}
+
+/* Volume Slider */
+.volume-control-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.volume-slider {
+  width: 70px;
+  accent-color: var(--pink-deep);
+  cursor: pointer;
+}
+
+/* Playlist Selector Tabs */
+.playlist-tabs-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.playlist-tab-btn {
+  flex: 1;
+  background: #FFF;
+  border: 1px solid #FFCAD4;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  color: var(--text-choco);
+  text-align: center;
+  transition: all 0.2s ease;
+  min-height: 36px;
+}
+.playlist-tab-btn.active {
+  background: var(--lavender);
+  border-color: var(--lavender-deep);
+  color: #4A3525;
+}
+
+.playlist-scroll-list {
+  max-height: 140px;
+  overflow-y: auto;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid #FFCCD5;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.playlist-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  min-height: 36px;
+}
+.playlist-item:hover {
+  background: #FFF0F3;
+}
+.playlist-item.active {
+  background: #FFD6E0;
+  font-weight: 800;
+  color: var(--pink-deep);
+}
+
+/* 17. CARD 5: BOX GỬI LỜI CHÚC & TEM STICKER */
+.wish-composer-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-choco);
+}
+
+/* Đảm bảo font-size >= 16px chống Safari zoom */
+.wish-input, .wish-textarea {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--text-choco);
+  background: #FFF;
+  border: 1.5px solid #FFCAD4;
+  border-radius: 16px;
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.wish-input:focus, .wish-textarea:focus {
+  border-color: var(--pink-deep);
+  box-shadow: 0 0 0 3px rgba(255, 93, 143, 0.2);
+}
+
+.wish-textarea {
+  resize: vertical;
+  min-height: 90px;
+  line-height: 1.5;
+}
+
+.sticker-chips-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.sticker-chip {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-choco);
+  background: #FFF;
+  border: 1px solid #FFCCD5;
+  border-radius: 14px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.sticker-chip.active, .sticker-chip:hover {
+  background: var(--pink-deep);
+  color: #FFF;
+  border-color: var(--pink-deep);
+}
+
+.submit-wish-btn {
+  background: linear-gradient(135deg, #FF5D8F, #FF8FA3);
+  color: #FFF;
+  border: none;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 800;
+  padding: 12px 20px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(255, 93, 143, 0.35);
+  transition: all 0.25s var(--bounce-easing);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+}
+.submit-wish-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(255, 93, 143, 0.45);
+}
+
+/* 18. CARD 6: HỘP QUÀ GACHA / VOUCHER YÊU THƯƠNG */
+.gacha-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+@media (min-width: 600px) and (max-width: 1023px) {
+  .gacha-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .gacha-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.gacha-box-item {
+  background: #FFF;
+  border: 1.5px solid #FFCAD4;
+  border-radius: 20px;
+  padding: 16px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s var(--bounce-easing);
+  box-shadow: 0 4px 12px rgba(255, 143, 163, 0.1);
+  min-height: 105px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  user-select: none;
+}
+
+.gacha-box-item:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: var(--pink-deep);
+  box-shadow: 0 8px 20px rgba(255, 93, 143, 0.25);
+}
+
+.gacha-icon {
+  font-size: 28px;
+  animation: heartPulse 3s infinite;
+}
+
+.gacha-label {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-choco);
+}
+
+.gacha-box-item.opened {
+  background: #FFF0F3;
+  border-color: var(--pink-deep);
+}
+
+/* MODAL XEM CHI TIẾT VOUCHER GACHA */
+.voucher-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(92, 64, 51, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+.voucher-modal-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.voucher-card-box {
+  width: 100%;
+  max-width: 380px;
+  background: #FFF9F5;
+  border: 3px dashed var(--pink-deep);
+  border-radius: 24px;
+  padding: 26px 20px;
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+  animation: letterSlideUp 0.4s var(--bounce-easing);
+  position: relative;
+}
+
+.voucher-title {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--pink-deep);
+  margin: 10px 0 6px;
+}
+
+.voucher-desc {
+  font-size: 14px;
+  color: var(--text-choco);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.voucher-code-badge {
+  background: #FFF;
+  border: 1px solid var(--pink-sakura);
+  padding: 6px 14px;
+  border-radius: 12px;
+  font-family: monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: #C9184A;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+/* 19. MASCOT THỎ BUN TƯƠNG TÁC (GÓC MÀN HÌNH) */
+.mascot-container {
+  position: fixed;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  right: 16px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.mascot-bubble {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid var(--pink-strawberry);
+  border-radius: 18px 18px 4px 18px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-choco);
+  max-width: 240px;
+  box-shadow: 0 4px 14px rgba(255, 93, 143, 0.2);
+  margin-bottom: 6px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  pointer-events: auto;
+}
+.mascot-bubble.show {
+  opacity: 1;
+  transform: translateY(0);
+  animation: speechBubbleIn 0.35s ease forwards;
+}
+
+.mascot-bunny-body {
+  width: 58px;
+  height: 58px;
+  cursor: pointer;
+  pointer-events: auto;
+  filter: drop-shadow(0 4px 10px rgba(255, 143, 163, 0.35));
+  animation: bunnyBounce 2.5s ease-in-out infinite;
+  transition: transform 0.2s var(--bounce-easing);
+}
+.mascot-bunny-body:active {
+  transform: scale(0.9);
+}
+
+/* 20. FOOTER CHÂN TRANG */
+.page-footer {
+  text-align: center;
+  padding: 18px 16px calc(24px + env(safe-area-inset-bottom));
+  position: relative;
+  z-index: 10;
+}
+
+.footer-love-text {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.footer-love-text .heart-icon {
+  display: inline-block;
+  color: var(--pink-deep);
+  animation: heartPulse 1.8s infinite;
+}

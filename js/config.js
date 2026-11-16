@@ -202,9 +202,9 @@ const CONFIG = {
   gachaVouchers: [
     {
       id: 1,
-      title: "Voucher Trà Sữa Thơm Ngon 🧋",
-      desc: "1 ly trà sữa full topping bất kỳ lúc nào Tường Vy thèm, ship tận nơi liền!",
-      code: "BUN-BOBA-0404"
+      title: "Voucher Trà Trái Cây Thanh Mát 🍹",
+      desc: "1 ly trà trái cây tươi mát full topping bất kỳ lúc nào Tường Vy thèm, ship tận nơi liền!",
+      code: "BUN-TEA-0404"
     },
     {
       id: 2,
